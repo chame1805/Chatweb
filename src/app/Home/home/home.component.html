@@ -1,0 +1,14 @@
+
+<div *ngIf="chat.chats.length<=0" class="w-full h-[500px] text-xl items-center flex justify-center text-center p-10">
+    no cuenta con ningun chat <a class="text-blue-600 mx-2 decoration-solid decoration-blue-600 underline" href="nuevo-chat"> inicie uno</a>
+</div>
+
+<div *ngFor="let contacto of contacto.contactos" class="mt-4">
+    <div  class="w-full flex flex-col items-center"  *ngFor="let chat of chat.chats" >
+        <div routerLink="chat" class=" cursor-alias border my-1 rounded-3xl p-3 w-1/2" *ngIf="chat.id_chat == contacto.id_chat && chat.ultimo != ''">
+            <h3 class="text-xl">{{contacto.name}}</h3>
+            <p *ngIf="contacto.id_chat == chat.id_chat &&chat.ultimo != ''">{{chat.ultimo}} </p>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,24 @@
+<div *ngFor="let contacto of contacto.contactos">
+    <div class="w-full flex justify-center " *ngFor="let mensaje of chat.mensajes">
+        @if (contador == 0) {
+            <h2 class="w-full flex justify-center bg-green-100 p-5 text-2xl" *ngIf="contacto.id == mensaje.id_usuario ">
+                {{contacto.name}}
+            </h2>
+            
+        }
+    </div>
+    <div class="w-full flex justify-center " *ngFor="let mensaje of chat.mensajes">
+        <div class="text-lg" *ngIf="contacto.id == mensaje.id_usuario">
+            {{mensaje.texto}} 
+            <span class="text-[10px]">
+                {{mensaje.hora}} 
+            </span>
+        </div>
+    </div>
+</div>
+<form (ngSubmit)="enviarMensaje()">
+    <label class=" fixed bottom-5 left-[25%] w-[50%] " for="">
+        <input class="border border-black w-full p-3 rounded-lg" placeholder="Redacta un mensaje"  type="text" name="mensaje" id="" [(ngModel)]="msj.texto">
+    </label>
+    <button class="fixed bottom-5 right-[19.5%] bg-green-400/80 rounded-lg p-3">Enviar</button>
+</form>

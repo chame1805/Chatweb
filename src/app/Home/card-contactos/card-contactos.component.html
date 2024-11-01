@@ -1,0 +1,28 @@
+
+<div class="w-full  justify-center  flex ">
+    <div  class="w-1/2 flex m-1 shadow-xl shadow-black/20 justify-between border duration-200 border-black/15 hover:scale-[102%] hover:bg-blue-100  p-2">
+        <p class=" p-2  cursor-default ">
+            <span class=" bg-blue-500 p-1 rounded-lg mr-5 text-white"> {{contacto.id}} </span> {{contacto.name}}
+        </p>
+        <p class="cursor-default p-2">{{contacto.email}}</p>
+        <div class="w-1/5 items-center flex justify-evenly">
+            <button (click)="editarDatos()" class="bg-slate-500 text-white rounded-md p-1"><span *ngIf="flagD">Cancelar</span> <span *ngIf="!flagD">Editar</span> </button>
+            <button (click)="eliminar()" class="bg-red-600 text-white rounded-md p-1">Eliminar</button>
+        </div>
+    </div>
+</div>
+<div class="w-full  justify-center my-5  flex" *ngIf="flagD">
+    <form class="w-1/2 flex gap-5 text-[#0038a8] bg-[#30f2e4]/10 hover:bg-[#30f2e4]/10 shadow-md shadow-black border border-[#0038a8] p-5 rounded-md flex-wrap items-end justify-center" (ngSubmit)="GuardarDatos()">
+        <span class="w-1/4"><span class="text-[12px]">Identificador</span>
+            <input class="w-full border-[#0038a8]  text-[rgb(0,56,168)] font-semibold border border-black/40 bg-transparent rounded-md p-2" type="number" [value]="contacto.id" [(ngModel)]="contacto.id" name="id" #id id="id">
+        </span>
+        <label class="w-1/4 "><span class="text-[12px]">Nombre:</span>
+            <input class="w-full  border-[#0038a8] text-[rgb(0,56,168)] font-semibold  border border-black/40 bg-transparent rounded-md p-2" type="text" (keyup)="cambiosEnElNombre()" [value]="contacto.name" [(ngModel)]="contacto.name"  name="name" id="name">
+        </label>
+        <span class="w-1/4"><span class="text-[12px]">Email:</span>
+            <input class="w-full border-[#0038a8]  text-[rgb(0,56,168)] font-semibold border border-black/40 bg-transparent rounded-md p-2" type="text" [value]="contacto.email" [(ngModel)]="contacto.email" name="email" #name id="email">
+        </span>
+        
+        <button class="w-1/4 h-10 mt-2 p-2 items-end text-[#30f2e4]  border bg-[#0038a8] border-blue-600 rounded-md">Guardar</button>
+    </form>
+</div>
