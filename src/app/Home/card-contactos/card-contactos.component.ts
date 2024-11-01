@@ -13,10 +13,10 @@ export class CardContactosComponent {
   @Output() cambioElTitulo = new EventEmitter<string>()
   flagD: boolean = false;
   @Input() contacto: Contacto = {
-    id: 0,
-    name : '',
+    idUsuario: 0,
+    nombre : '',
     email : '',
-    id_chat: 1
+    password: ""
   }
   editarDatos(){
     this.flagD = !this.flagD
@@ -26,11 +26,11 @@ export class CardContactosComponent {
     console.log(this.Contacto.contactos)
   }
   eliminar(){
-    this.Contacto.eliminarContacto(this.contacto.id)
+    this.Contacto.eliminarContacto(this.contacto.idUsuario)
   }
   cambiosEnElNombre(){
-    this.cambioElTitulo.emit(this.contacto?.name)
-    console.log(this.contacto?.name)
+    this.cambioElTitulo.emit(this.contacto?.nombre)
+    console.log(this.contacto?.nombre)
     
   }
 }

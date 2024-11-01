@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { Contacto } from '../Interfaces/contacto';
+import { ConnectDatabaseService } from '../Services/connect-database.service';
 import { LoginService } from '../Services/login.service';
-import { LoginData } from '../Interfaces/login';
 
 @Component({
   selector: 'app-register',
@@ -8,28 +9,30 @@ import { LoginData } from '../Interfaces/login';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  userData: LoginData = {
-    nombre: '',
-    password: '',
-    correo: '',
-    id: ''
+  userData: Contacto = {
+    "nombre": '',
+    "email": '',
+    "password": '',
+    "idUsuario": 0
   };
-  currentId = 1;
-
-  constructor(private loginService: LoginService) {}
+  constructor(private userP: ConnectDatabaseService) {}
 
   registerUser() {
-    this.userData.id = this.currentId.toString();
-    this.currentId++;
-    this.loginService.addData(this.userData);
-    console.log('Usuario registrado:', this.userData);
+    this.userP.enviarDatos(this.userData).subscribe(
+      (response) => {
+        console.log('Datos enviados', response);
+      },
+      (error) => {
+        console.error('Error al enviar datos', error);
+      }
+    )
 
     // Resetea el formulario
     this.userData = {
-      nombre: '',
-      password: '',
-      correo: '',
-      id: ''
+      "nombre": "",
+	    "email": "",
+	    "password": "",
+	    "idUsuario": undefined
     };
   }
 }

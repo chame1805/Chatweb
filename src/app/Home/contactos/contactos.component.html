@@ -4,7 +4,7 @@
     </h1>
 </div>
 <div *ngFor="let contacto of contactos.contactos" class="w-full justify-center">
-    <app-card-contactos (cambioElTitulo)="contacto.name = $event " [contacto]="contacto"></app-card-contactos>
+    <app-card-contactos (cambioElTitulo)="contacto.nombre = $event " [contacto]="contacto"></app-card-contactos>
 </div>
 <div *ngIf="!modal" class="w-full flex justify-end bottom-10 right-20 fixed">    
     <button (click)="flagForModal()" class=" border rounded border-gray-200 bg-blue-300 p-2 ">Agregar Contactos</button>
@@ -15,10 +15,10 @@
         <h1 class="p-2 text-3xl">Formulario:</h1>
         <form (ngSubmit)="agregarContacto()" class="w-full h-5/6 flex flex-col  justify-center items-center ">
             <label class="m-5" for="name">Nombre:
-                <input class=" placeholder:text-blue-700/90 border bg-transparent border-blue-600 text-blue-700 w-full rounded-md p-2" type="text" name="nombre" id="name" #name placeholder="Introduce nombre del contacto" [(ngModel)]="cont.name">
+                <input class=" placeholder:text-blue-700/90 border bg-transparent border-blue-600 text-blue-700 w-full rounded-md p-2" type="text" name="nombre" id="name" #name placeholder="Introduce nombre del contacto" [(ngModel)]="cont.nombre">
             </label>
             <label class="m-5" for="Email">Id unico:
-                <input class=" w-full p-2 bg-transparent border border-blue-700 rounded-md" type="number" name="IDE" id="Id" #id placeholder="Identificador numerido" [(ngModel)]="cont.id">
+                <input class=" w-full p-2 bg-transparent border border-blue-700 rounded-md" type="number" name="IDE" id="Id" #id placeholder="Identificador numerido" [(ngModel)]="cont.idUsuario">
             </label>
             <label class="m-5" for="Email">Correo:
                 <input class=" w-full p-2 bg-transparent border border-blue-700 rounded-md" type="text" name="email" id="Email" #email placeholder="Correo electronico" [(ngModel)]="cont.email">

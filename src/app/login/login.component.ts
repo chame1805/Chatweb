@@ -1,37 +1,48 @@
-import { Component } from '@angular/core';
-import { LoginService } from '../Services/login.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Contacto } from '../Interfaces/contacto';
 import { LoginData } from '../Interfaces/login';
-
+import { ConnectDatabaseService } from '../Services/connect-database.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginData: LoginData = {
     nombre: '',
     password: '',
     correo: '',
     id: ''
   };
-  errorMessage: string = '';
+  
+  constructor ( public users: ConnectDatabaseService, private router: Router) {}
+  datos: Contacto[] =[]
 
-  constructor(public loginService: LoginService) {}
-
+  ngOnInit(): void {
+    this.users.get().subscribe(
+      (response) => {
+        this.datos = response
+        console.log(this.datos);
+      },
+      (error) => {
+        console.error('Error al obtener datos', error);
+      }
+    );
+  }
   envioDatos() {
-    const user = this.loginService.getData().find(
-      u => u.correo === this.loginData.correo && u.password === this.loginData.password
+    const user = this.datos.find(
+      u => u.email === this.loginData.correo && u.password === this.loginData.password
     );
 
     if (user) {
       console.log('Inicio de sesión exitoso:', user);
-      this.errorMessage = '';
+      sessionStorage.setItem("id_user", user.idUsuario)
+      this.router.navigate(['/home'])
       this.resetForm();
-    } else {
-      this.errorMessage = 'Correo o contraseña incorrectos.';
-      console.log(this.errorMessage);
-    }
+    } 
   }
+
 
   resetForm() {
     this.loginData = {

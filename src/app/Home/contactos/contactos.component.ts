@@ -10,10 +10,10 @@ import { ContactosService } from '../../Services/contactos.service';
 export class ContactosComponent {
 
   @Input() cont: Contacto = {
-    id: undefined,
-    name:'',
+    idUsuario: undefined,
+    nombre:'',
     email: '',
-    id_chat: 0
+    password: ""
   }
   modal: boolean = false 
   constructor(public contactos: ContactosService ){}
@@ -21,13 +21,12 @@ export class ContactosComponent {
     this.modal = !this.modal
   }
   agregarContacto(){
-    this.cont.id_chat = this.contactos.contactos.length + 1
     this.contactos.contactos.push(this.cont)
     this.cont = {
-      id: 0,
-      name:'',
+      idUsuario: 0,
+      nombre:'',
       email: '',
-      id_chat: 0
+      password: ""
     }
   }
 }
