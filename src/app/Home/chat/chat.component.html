@@ -1,14 +1,13 @@
 <div *ngFor="let contacto of contacto.contactos">
     <div class="w-full flex justify-center " *ngFor="let mensaje of chat.mensajes">
         @if (contador == 0) {
-            <h2 class="w-full flex justify-center bg-green-100 p-5 text-2xl" *ngIf="contacto.id == mensaje.id_usuario ">
-                {{contacto.name}}
+            <h2 class="w-full flex justify-center bg-green-100 p-5 text-2xl" *ngIf="">
             </h2>
             
         }
     </div>
     <div class="w-full flex justify-center " *ngFor="let mensaje of chat.mensajes">
-        <div class="text-lg" *ngIf="contacto.id == mensaje.id_usuario">
+        <div class="text-lg" *ngIf="">
             {{mensaje.texto}} 
             <span class="text-[10px]">
                 {{mensaje.hora}} 
