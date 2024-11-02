@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Contacto } from '../Interfaces/contacto';
+import { Usuario } from '../Interfaces/contacto';
 import { ConnectDatabaseService } from '../Services/connect-database.service';
 import { LoginService } from '../Services/login.service';
 
@@ -9,11 +9,11 @@ import { LoginService } from '../Services/login.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  userData: Contacto = {
+  userData: Usuario = {
     "nombre": '',
     "email": '',
     "password": '',
-    "idUsuario": 0
+    "idUsuario": 1
   };
   constructor(private userP: ConnectDatabaseService) {}
 

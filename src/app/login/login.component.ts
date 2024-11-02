@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Contacto } from '../Interfaces/contacto';
+import { Usuario } from '../Interfaces/contacto';
 import { LoginData } from '../Interfaces/login';
 import { ConnectDatabaseService } from '../Services/connect-database.service';
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   };
   
   constructor ( public users: ConnectDatabaseService, private router: Router) {}
-  datos: Contacto[] =[]
+  datos: Usuario[] =[]
 
   ngOnInit(): void {
     this.users.get().subscribe(
@@ -31,16 +31,17 @@ export class LoginComponent implements OnInit {
     );
   }
   envioDatos() {
-    const user = this.datos.find(
-      u => u.email === this.loginData.correo && u.password === this.loginData.password
-    );
-
-    if (user) {
-      console.log('Inicio de sesión exitoso:', user);
-      sessionStorage.setItem("id_user", user.idUsuario)
-      this.router.navigate(['/home'])
-      this.resetForm();
-    } 
+    for (let index = 0; index < this.datos.length; index++) {
+      if( this.datos[index].email == this.loginData.correo && this.datos[index].password == this.loginData.password ){
+        console.log('Inicio de sesión exitoso:', this.datos[index]);
+        sessionStorage.setItem("id_user", this.datos[index].idUsuario)
+        this.router.navigate(['/inicio'])
+      }
+      else{
+        console.log('Inicio de sesión fallido');
+      }
+    }
+    
   }
 
 
