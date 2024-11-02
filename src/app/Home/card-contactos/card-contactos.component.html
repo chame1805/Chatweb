@@ -1,6 +1,6 @@
 
 <div class="w-full  justify-center  flex ">
-    <div  class="w-1/2 flex m-1 shadow-xl shadow-black/20 justify-between border duration-200 border-black/15 hover:scale-[102%] hover:bg-blue-100  p-2">
+    <div (click)="irAlChat()" class="w-1/2  flex m-1 shadow-xl shadow-black/20 justify-between border duration-200 border-black/15 hover:scale-[102%] hover:bg-blue-100  p-2">
         <p class=" p-2  cursor-default ">
             <span class=" bg-blue-500 p-1 rounded-lg mr-5 text-white"> {{contacto.idUsuario}} </span> {{contacto.nombre}}
         </p>
@@ -17,7 +17,7 @@
             <input class="w-full border-[#0038a8]  text-[rgb(0,56,168)] font-semibold border border-black/40 bg-transparent rounded-md p-2" type="number" [value]="contacto.idUsuario" [(ngModel)]="contacto.idUsuario" name="id" #id id="id">
         </span>
         <label class="w-1/4 "><span class="text-[12px]">Nombre:</span>
-            <input class="w-full  border-[#0038a8] text-[rgb(0,56,168)] font-semibold  border border-black/40 bg-transparent rounded-md p-2" type="text" (keyup)="cambiosEnElNombre()" [value]="contacto.nombre " [(ngModel)]="contacto.nombre"  name="name" id="name">
+            <input class="w-full  border-[#0038a8] text-[rgb(0,56,168)] font-semibold  border border-black/40 bg-transparent rounded-md p-2" type="text" (keyup)="cambiosEnElNombre()" [value]="contacto.nombre" [(ngModel)]="contacto.nombre"  name="name" id="name">
         </label>
         <span class="w-1/4"><span class="text-[12px]">Email:</span>
             <input class="w-full border-[#0038a8]  text-[rgb(0,56,168)] font-semibold border border-black/40 bg-transparent rounded-md p-2" type="text" [value]="contacto.email" [(ngModel)]="contacto.email" name="email" #name id="email">

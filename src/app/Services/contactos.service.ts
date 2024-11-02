@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Contacto } from '../Interfaces/contacto';
+import { Usuario } from '../Interfaces/contacto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactosService {
 
-  constructor() { }
-  contactos: Contacto[] = [
+  constructor(  ) { }
+  contactos: Usuario[] = [
   ]
   eliminarContacto(id: number){
     for (let index = 0; index < this.contactos.length; index++) {
