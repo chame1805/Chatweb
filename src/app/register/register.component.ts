@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Usuario } from '../Interfaces/contacto';
 import { ConnectDatabaseService } from '../Services/connect-database.service';
-import { LoginService } from '../Services/login.service';
 
 @Component({
   selector: 'app-register',
@@ -9,30 +9,33 @@ import { LoginService } from '../Services/login.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  userData: Usuario = {
+  userData = {
     "nombre": '',
     "email": '',
-    "password": '',
-    "idUsuario": 1
+    "password": ''
   };
-  constructor(private userP: ConnectDatabaseService) {}
+  constructor(private userP: ConnectDatabaseService, private router: Router) {}
 
+  alert : boolean = false
   registerUser() {
     this.userP.enviarDatos(this.userData).subscribe(
       (response) => {
         console.log('Datos enviados', response);
+        this.router.navigate(['login'])
       },
       (error) => {
         console.error('Error al enviar datos', error);
+        this.alert = !this.alert
       }
     )
-
     // Resetea el formulario
     this.userData = {
       "nombre": "",
 	    "email": "",
-	    "password": "",
-	    "idUsuario": undefined
+	    "password": ""
     };
+  }
+  cerrarModal(){
+    this.alert = !this.alert
   }
 }

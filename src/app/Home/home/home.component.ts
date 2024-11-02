@@ -23,5 +23,8 @@ export class HomeComponent  implements OnInit{
         console.error('Error al obtener datos', error);
       }
     );
+    for (let index = 0; index < this.datos.length; index++){
+
+    }
   }
 }

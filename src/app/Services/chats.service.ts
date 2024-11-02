@@ -24,7 +24,7 @@ export class ChatsService {
   getChatsById(id: number): Observable<Mensaje>{
     return this.http.get<Mensaje>(this.apiUrl2 + "/" + id)
   }
-  addMensaje(mensaje: Mensaje): Observable<any>{
+  addMensaje(mensaje: any): Observable<any>{
     return this.http.post<Mensaje>(this.apiUrl, mensaje);
   }
 }
