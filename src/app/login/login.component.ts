@@ -9,13 +9,16 @@ import { ConnectDatabaseService } from '../Services/connect-database.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  cerrarModal(){
+    this.alert = !this.alert
+  }
   loginData: LoginData = {
     nombre: '',
     password: '',
     correo: '',
     id: ''
   };
-  
+  alert : boolean =false
   constructor ( public users: ConnectDatabaseService, private router: Router) {}
   datos: Usuario[] =[]
 
@@ -31,6 +34,7 @@ export class LoginComponent implements OnInit {
     );
   }
   envioDatos() {
+    this.datos.length == 0 ? this.alert = !this.alert : ""
     for (let index = 0; index < this.datos.length; index++) {
       if( this.datos[index].email == this.loginData.correo && this.datos[index].password == this.loginData.password ){
         console.log('Inicio de sesión exitoso:', this.datos[index]);
@@ -39,6 +43,7 @@ export class LoginComponent implements OnInit {
       }
       else{
         console.log('Inicio de sesión fallido');
+        this.alert = !this.alert
       }
     }
     

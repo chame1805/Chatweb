@@ -1,13 +1,13 @@
 <app-navbar/>
 <div *ngIf="datos.length<=0" class="w-full h-[500px] text-xl items-center flex justify-center text-center p-10">
-    no cuenta con ningun chat <a class="text-blue-600 mx-2 decoration-solid decoration-blue-600 underline" href="nuevo-chat"> inicie uno</a>
+    no cuenta con ningun chat <a class="text-blue-600 mx-2 decoration-solid decoration-blue-600 underline" href="/contacto"> inicie uno</a>
 </div>
 
 <div *ngFor="let contacto of datos " class="mt-4">
     <div  class="w-full flex flex-col items-center"   >
-        <div routerLink="chat" class=" cursor-alias border my-1 rounded-3xl p-3 w-1/2" *ngIf="">
-            <h3 class="text-xl"></h3>
-            <p *ngIf=""> </p>
+        <div routerLink="chat" class=" cursor-alias border my-1 rounded-3xl p-3 w-1/2" >
+            <h3 class="text-xl"> {{contacto.idChat}} </h3>
+            <p > {{contacto.ultimo_msj}} </p>
         </div>
     </div>
 </div>

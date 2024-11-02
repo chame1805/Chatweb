@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioHasChat } from '../../Interfaces/UsuarioHasChat';
-import { Chat } from '../../Interfaces/chat';
 import { Usuario } from '../../Interfaces/contacto';
 import { ConnectListChatsVaciosService } from '../../Services/connect-list-chats-vacios.service';
 import { ConnectDatabaseService } from '../../Services/connect-list-chats.service';
@@ -17,15 +16,18 @@ export class CardContactosComponent {
   idUsuario: number = sessionStorage.getItem('id_user') as string | null ? parseInt(sessionStorage.getItem('id_user')!) : 0;
 
   uschat: UsuarioHasChat={
-    Chat_idChat : 0,
+    Chat_idChat : 0 ,
     Usuario_idUsuario : this.idUsuario
   }
-  chat: Chat = {
-    idChat: 8,
+  chat= {
     ultimo_msj : ''
   }
   @Output() cambioElTitulo = new EventEmitter<string>()
   flagD: boolean = false;
+  @Input() cont = {
+    id_usuario: 0,
+    Usuario_idUsuario: 0
+  }
   @Input() contacto: Usuario = {
     idUsuario: 0,
     nombre : '',
@@ -53,11 +55,13 @@ export class CardContactosComponent {
     this._serv.NewChat(this.chat).subscribe(
       response => {
         console.log('Nuevo chat agregado:', response);
-        this.uschat.Chat_idChat = this.chat.idChat
+        this.uschat.Chat_idChat = response.idChat
         this._serv.newUsChat(this.uschat).subscribe(
           response=>{
             console.log('Nuevo usuario agregado a chat:', response)
             this.router.navigate(['home/chat'])
+          },error =>{
+            console.log("error al ir al chat", error)
           }
         )
       },

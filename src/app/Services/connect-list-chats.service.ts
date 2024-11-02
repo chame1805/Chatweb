@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Usuario } from '../Interfaces/contacto';
 import { Chat } from '../Interfaces/chat';
 import { UsuarioHasChat } from '../Interfaces/UsuarioHasChat';
 
@@ -20,8 +19,8 @@ export class ConnectDatabaseService {
   getChats(): Observable<Chat[]>{
     return this.http.get<Chat[]>(this.apiUrl)
   }
-  NewChat(data: Chat): Observable<any> {
-    return this.http.post<Chat>(this.apiUrl, data);
+  NewChat(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, data);
   }
   newUsChat(data: UsuarioHasChat): Observable<any>{
     return this.http.post<UsuarioHasChat>(this.apiUrl2, data)

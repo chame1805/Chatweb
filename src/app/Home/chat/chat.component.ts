@@ -23,13 +23,12 @@ export class ChatComponent implements OnInit, DoCheck {
       this.contador++
   }
   contador = 0
-  @Input() msj: Mensaje = {
+  @Input() msj = {
       hora: "",
       fecha: "",
       estatus: false,
       id_usuario:2,
       id_chat: 8,
-      idMensaje:2,
       mensaje: ""
     }
     enviarMensaje(){
@@ -47,8 +46,7 @@ export class ChatComponent implements OnInit, DoCheck {
         fecha: "",
         estatus: false,
         id_usuario:1,
-        id_chat: 8,
-        idMensaje: this.msj.idMensaje + 1,
+        id_chat: 6,
         mensaje: ""
       }
     }

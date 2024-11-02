@@ -27,7 +27,7 @@ export class ConnectListChatsVaciosService {
   getChatsById(id: number): Observable<Usuario>{
     return this.http.get<Usuario>(this.apiUrl2 + "/" + id)
   }
-  NewChat(data: Contacto): Observable<any> {
+  NewChat(data: any): Observable<any> {
     return this.http.post<Contacto>(this.apiUrl, data);
   }
 }

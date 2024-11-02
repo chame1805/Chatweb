@@ -15,9 +15,8 @@ export class ContactosComponent implements OnInit, OnDestroy {
     Usuario_idUsuario: 0
   }
 
-  @Input() cont: Contacto = {
+  @Input() cont = {
     id_usuario: Number(sessionStorage.getItem('id_user')) || 0,
-    idLista_Contacto: 20, //esta es la variable a cambiar
     Usuario_idUsuario: 0
   }
 
@@ -30,8 +29,8 @@ export class ContactosComponent implements OnInit, OnDestroy {
   constructor(public _servicio: ConnectListChatsVaciosService, private cdr: ChangeDetectorRef) {}
   
   agregarContacto() {
+    console.log("datos", this.cont)
     this.modal = !this.modal;
-    this.contacto.Usuario_idUsuario = 
     this._servicio.NewChat(this.cont).subscribe(
       response => {
         console.log('Nuevo chat agregado:', response);
@@ -51,6 +50,8 @@ export class ContactosComponent implements OnInit, OnDestroy {
             this._servicio.listaContactos.push(data);
             this.cdr.detectChanges(); // Asegura la actualización de la vista
           });
+        } else {
+          console.log("no coincide")
         }
       });
       console.log(this._servicio.chats);

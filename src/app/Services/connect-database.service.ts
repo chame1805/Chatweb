@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {Usuario } from '../Interfaces/contacto';
+import { Usuario } from '../Interfaces/contacto';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class ConnectDatabaseService {
   get(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(this.apiUrl)
   }
-  enviarDatos(data: Usuario): Observable<any> {
-    return this.http.post<Usuario>(this.apiUrl, data);
+  enviarDatos(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, data);
   }
   
 }
