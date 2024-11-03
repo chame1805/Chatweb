@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../Interfaces/contacto';
 import { LoginData } from '../Interfaces/login';
-import { ConnectDatabaseService } from '../Services/connect-database.service';
+import { ConnectDatabaseService1 } from '../Services/connect-database.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     id: ''
   };
   alert : boolean =false
-  constructor ( public users: ConnectDatabaseService, private router: Router) {}
+  constructor ( public users: ConnectDatabaseService1, private router: Router) {}
   datos: Usuario[] =[]
 
   ngOnInit(): void {

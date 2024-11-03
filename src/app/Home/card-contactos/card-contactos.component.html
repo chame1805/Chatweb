@@ -1,11 +1,14 @@
 
-<div class="w-full  justify-center  flex ">
-    <div (click)="irAlChat()" class="w-1/2  flex m-1 shadow-xl shadow-black/20 justify-between border duration-200 border-black/15 hover:scale-[102%] hover:bg-blue-100  p-2">
-        <p class=" p-2  cursor-default ">
-            <span class=" bg-blue-500 p-1 rounded-lg mr-5 text-white"> {{contacto.idUsuario}} </span> {{contacto.nombre}}
-        </p>
-        <p class="cursor-default p-2">{{contacto.email}}</p>
-        <div class="w-1/5 items-center flex justify-evenly">
+<div class="w-full  justify-center flex ">
+    <div class="w-3/4  flex m-1 shadow-xl shadow-black/20  border duration-200 border-black/15 hover:scale-[102%] hover:bg-blue-100">
+        <div (click)="irAlChat()" class="w-full flex  justify-between  p-2">
+            <p class=" h-full w-full  items-center flex  justify-between  cursor-default ">
+                <span class=" bg-blue-500 p-1 w-20 block text-center rounded-lg mr-5 text-white"> {{contacto.idUsuario}} </span> 
+                <span> {{contacto.nombre}} </span>
+                <span class="block w-1/2 cursor-default p-2">{{contacto.email}}</span>
+            </p>
+        </div>
+        <div class="w-1/4  flex m-1 justify-evenly   p-2">
             <button (click)="editarDatos()" class="bg-slate-500 text-white rounded-md p-1"><span *ngIf="flagD">Cancelar</span> <span *ngIf="!flagD">Editar</span> </button>
             <button (click)="eliminar()" class="bg-red-600 text-white rounded-md p-1">Eliminar</button>
         </div>

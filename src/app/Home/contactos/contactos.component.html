@@ -4,8 +4,12 @@
         Listado de contactos
     </h1>
 </div>
-<div *ngFor="let contacto of _servicio.listaContactos" class="w-full justify-center">
-    <app-card-contactos [cont]="cont" (cambioElTitulo)="contacto.nombre = $event " [contacto]="contacto"></app-card-contactos>
+<div *ngFor="let chat of _servicio.chats">
+    <div *ngFor="let contacto of _servicio.listaContactos" class="w-full justify-center">
+        <div *ngIf="contacto.idUsuario == chat.Usuario_idUsuario">
+            <app-card-contactos [cont]="cont"  [idList]="chat.idLista_Contacto" [contacto]="contacto"/> 
+        </div>
+    </div>
 </div>
 <div *ngIf="!modal" class="w-full flex justify-end bottom-10 right-20 fixed">    
     <button (click)="flagForModal()" class=" border rounded border-gray-200 bg-blue-300 p-2 ">Agregar Contactos</button>

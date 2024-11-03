@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../Interfaces/contacto';
-import { ConnectDatabaseService } from '../Services/connect-database.service';
+import { ConnectDatabaseService1 } from '../Services/connect-database.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +13,7 @@ export class RegisterComponent {
     "email": '',
     "password": ''
   };
-  constructor(private userP: ConnectDatabaseService, private router: Router) {}
+  constructor(private userP: ConnectDatabaseService1, private router: Router) {}
 
   alert : boolean = false
   registerUser() {

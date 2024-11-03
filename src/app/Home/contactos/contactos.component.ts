@@ -8,15 +8,22 @@ import { ConnectListChatsVaciosService } from '../../Services/connect-list-chats
   styleUrls: ['./contactos.component.css']
 })
 export class ContactosComponent implements OnInit, OnDestroy {
+  constructor(public _servicio: ConnectListChatsVaciosService, private cdr: ChangeDetectorRef) {}
+
+
+  user: number = Number(sessionStorage.getItem('id_user')) || 0
+  getDatos(){
+    this.user = this._servicio.getLocalStorage()
+  }
 
   contacto: Contacto = {
-    id_usuario: Number(sessionStorage.getItem('id_user')) || 0,
+    id_usuario: this.user,
     idLista_Contacto: 10,
     Usuario_idUsuario: 0
   }
 
   @Input() cont = {
-    id_usuario: Number(sessionStorage.getItem('id_user')) || 0,
+    id_usuario: this.user ,
     Usuario_idUsuario: 0
   }
 
@@ -26,7 +33,6 @@ export class ContactosComponent implements OnInit, OnDestroy {
     this.modal = !this.modal;
   }
   
-  constructor(public _servicio: ConnectListChatsVaciosService, private cdr: ChangeDetectorRef) {}
   
   agregarContacto() {
     console.log("datos", this.cont)
@@ -42,9 +48,10 @@ export class ContactosComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
+    this.getDatos()
     this._servicio.getChats().subscribe(data => {
       data.forEach(element => {
-        if (element.id_usuario == sessionStorage.getItem('id_user')) {
+        if (element.id_usuario == this.user) {
           this._servicio.chats.push(element);
           this._servicio.getChatsById(element.Usuario_idUsuario).subscribe(data => {
             this._servicio.listaContactos.push(data);
@@ -57,6 +64,8 @@ export class ContactosComponent implements OnInit, OnDestroy {
       console.log(this._servicio.chats);
       console.log(this._servicio.listaContactos);
     });
+    
+    
   }
 
   ngOnDestroy(): void {
