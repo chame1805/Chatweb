@@ -21,34 +21,35 @@ export class HomeComponent  implements OnInit{
   ngOnInit(): void {
     this._servicioChat.getChats(this.id_user).subscribe(
       (response) => {
-        console.log("primera peticion",response)
+        //console.log("primera peticion",response)
         this.datos = response
         this.datos.forEach(element=>{
             this._servicioChat.getChatsById(element.Chat_idChat).subscribe(
               (respons) => {
-                console.log("segunda peticion",respons)
+                //console.log("segunda peticion",respons)
                 let dta = {
                   idChat: respons.idChat,
                   mensaje: respons.ultimo_msj,
-                  users: ""
+                  users: "",
+                  idUser: 0
                 }
                 this._servicioChat.getUsersChat(element.Chat_idChat).subscribe(
                   (resp) => {
-                    console.log("tercera peticion",resp);
+                    //console.log("tercera peticion",resp);
                     resp.forEach(element=>{
                       this._user.getById(element.Usuario_idUsuario).subscribe(
                         (response) => {
-                          console.log("cuarta peticion",response)
+                          //console.log("cuarta peticion",response)
                           if(response.idUsuario != Number(sessionStorage.getItem('id_user')) ){
-                            dta.users += response.nombre + " "
-                            
+                            dta.users += response.nombre
+                            dta.idUser = response.idUsuario
+                            console.log(dta.idUser)
                           } 
                         }
                       )
                     })
-
                   })
-                  console.log(dta)
+                  //console.log("--------------------------------------------", dta)
                 this.chats.push(dta)
 
               },(error) => { console.error( 'Error al obtener datos', error ) }
@@ -60,19 +61,19 @@ export class HomeComponent  implements OnInit{
       }
     );
   }
-  irAlChat(){
+  irAlChat( id: number){
     this._serv.getChats(this.idUsuario).subscribe(
       (response) => {
         this.persona1 = response
         console.log(response)
       }
     )
-    /*this._serv.getChats(this.contacto.idUsuario).subscribe(
+    this._serv.getChats(id).subscribe(
       (response) => {
         this.persona2 = response
         console.log(response)
       }
-    )*/
+    )
     if(this.persona1 && this.persona2){
     for (let i = 0; i < this.persona1.length; i ++) {
       for (let j = 0; j < this.persona2.length; j++) {

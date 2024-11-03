@@ -10,6 +10,6 @@ export class NavbarComponent {
 
   constructor( private router: Router ){}
   logout(){
-    sessionStorage.removeItem("id_user")
+    sessionStorage.clear()
   }
 }
