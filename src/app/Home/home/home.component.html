@@ -5,9 +5,9 @@
 
 <div *ngFor="let contacto of chats " class="mt-4">
     <div  class="w-full flex flex-col items-center"   >
-        <div routerLink="chat" class=" cursor-alias border my-1 rounded-3xl p-3 w-1/2" >
+        <div (click)="irAlChat()" class=" cursor-alias border my-1 rounded-3xl p-3 w-1/2" >
             <h3 class="text-xl" > {{contacto.users}} </h3>            
-            <p > {{contacto.mensaje}} </p>
+            <p> {{contacto.mensaje}} </p>
         </div>
     </div>
 </div>

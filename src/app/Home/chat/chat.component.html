@@ -1,12 +1,20 @@
 
+<h1 class="w-full  bg-blue-200 text-xl flex justify-between items-center text-blue-600"  >
+    <a routerLink="/inicio"> regresar</a>
+    <span class="p-2 text-3xl" >chat con  {{usuarioActivo.nombre}} </span> 
+    <a routerLink="/home"> home </a>
+</h1>
+<div class="p-5 w-full">
     <div class="w-full flex justify-center " *ngFor="let mensajes of mensajeDelChat">
-            <h2 class="w-full flex justify-center text-green-600 bg-green-100 p-5 text-2xl" *ngIf="mensajes.id_usuario == user">
-                {{mensajes.mensaje}}
-            </h2>
-            <h2 class="w-full flex justify-center text-blue-600 bg-blue-100 p-5 text-2xl" *ngIf="mensajes.id_usuario != user">
-                {{mensajes.mensaje}}
-            </h2>
-    </div>
+        <h2 class="w-3/4 flex justify-end text-green-600  p-1 text-2xl" *ngIf="mensajes.id_usuario == user">
+            <span class="bg-green-100 px-5 py-1  rounded-tl-[40px]  rounded-br-[30px] rounded-bl-[5px]">{{mensajes.mensaje}} <span class="text-xs"> {{mensajes.hora}} </span></span>
+            
+        </h2>
+        <h2 class="w-3/4 flex  text-blue-600  p-1 text-2xl" *ngIf="mensajes.id_usuario != user">
+            <span class="bg-blue-100 px-5 py-1 rounded-bl-[30px]  rounded-tr-[40px] rounded-br-[5px] ">{{mensajes.mensaje}} <span class="text-xs"> {{mensajes.hora}} </span></span>
+        </h2>
+    </div>  
+</div>
 <form (ngSubmit)="enviarMensaje()">
     <label class=" fixed bottom-5 left-[25%] w-[50%] " for="">
         <input class="border border-black w-full p-3 rounded-lg" placeholder="Redacta un mensaje"  type="text" name="mensaje" id="" [(ngModel)]="msj.mensaje">
