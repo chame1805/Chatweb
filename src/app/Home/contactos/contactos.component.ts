@@ -11,6 +11,7 @@ export class ContactosComponent implements OnInit, OnDestroy {
   constructor(public _servicio: ConnectListChatsVaciosService, private cdr: ChangeDetectorRef) {}
 
 
+  alertaNo= false
   user: number = Number(sessionStorage.getItem('id_user')) || 0
   getDatos(){
     this.user = this._servicio.getLocalStorage()
@@ -42,11 +43,14 @@ export class ContactosComponent implements OnInit, OnDestroy {
         console.log('Nuevo chat agregado:', response);
       },
       error => {
+        this.alertaNo = !this.alertaNo
         console.error('Error al agregar nuevo chat:', error);
       }
     );
   }
-  
+  cerrarAlerta(){
+    this.alertaNo = !this.alertaNo
+  }
   ngOnInit(): void {
     this.getDatos()
     this._servicio.getChats().subscribe(data => {

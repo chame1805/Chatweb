@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnDestroy, OnInit } from '@angular/core';
 import { Mensaje } from '../../Interfaces/mensaje';
 import { ChatsService } from '../../Services/chats.service';
 @Component({
@@ -6,7 +6,7 @@ import { ChatsService } from '../../Services/chats.service';
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
-export class ChatComponent implements OnInit, DoCheck {
+export class ChatComponent implements OnInit, DoCheck, OnDestroy {
 
   usuarioActivo : any={
     email:"",
@@ -73,6 +73,10 @@ export class ChatComponent implements OnInit, DoCheck {
         id_chat: sessionStorage.getItem("id_chat") || 0,
         mensaje: ""
       }
+    }
+  
+    ngOnDestroy(): void {
+        sessionStorage.removeItem('id_chat')
     }
 
 }
