@@ -11,10 +11,18 @@ export class ChatComponent implements OnInit, DoCheck {
   flag = true;
   constructor(public mensaje: ChatsService){
   }
+  mensajeDelChat : Mensaje[] = [
+  ]
   user : number = Number(sessionStorage.getItem('id_user')) || 0
   ngOnInit(): void {
     
     this.mensaje.getMensajes().subscribe(data=>{
+      data.forEach(element => {
+        if(this.user == element.id_usuario){
+          this.mensajeDelChat.push(element)
+        }
+        console.log("del chat",this.mensajeDelChat)
+      })
       this.mensaje.mensaje = data
       console.log("datos cargados", this.mensaje.mensaje)
     })
@@ -27,7 +35,7 @@ export class ChatComponent implements OnInit, DoCheck {
       hora: "",
       fecha: "",
       estatus: false,
-      id_usuario:2,
+      id_usuario: sessionStorage.getItem("id_user"),
       id_chat: 8,
       mensaje: ""
     }
@@ -45,7 +53,7 @@ export class ChatComponent implements OnInit, DoCheck {
         hora: "",
         fecha: "",
         estatus: false,
-        id_usuario:1,
+        id_usuario: sessionStorage.getItem("id_user "),
         id_chat: 6,
         mensaje: ""
       }

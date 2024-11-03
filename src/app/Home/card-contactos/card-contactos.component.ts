@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioHasChat } from '../../Interfaces/UsuarioHasChat';
 import { Usuario } from '../../Interfaces/contacto';
@@ -10,11 +10,14 @@ import { ConnectDatabaseService } from '../../Services/connect-list-chats.servic
   templateUrl: './card-contactos.component.html',
   styleUrl: './card-contactos.component.css'
 })
-export class CardContactosComponent {
+export class CardContactosComponent implements OnInit{
   constructor( private _servicio: ConnectListChatsVaciosService, private _serv: ConnectDatabaseService,private router: Router){}
 
   idUsuario: number = sessionStorage.getItem('id_user') as string | null ? parseInt(sessionStorage.getItem('id_user')!) : 0;
 
+  ngOnInit(): void {
+      console.log(this.contacto)
+  }
   uschat: UsuarioHasChat={
     Chat_idChat : 0 ,
     Usuario_idUsuario : this.idUsuario
@@ -22,12 +25,12 @@ export class CardContactosComponent {
   chat= {
     ultimo_msj : ''
   }
-  @Output() cambioElTitulo = new EventEmitter<string>()
   flagD: boolean = false;
   @Input() cont = {
     id_usuario: 0,
     Usuario_idUsuario: 0
   }
+  @Input() idList : number = 0
   @Input() contacto: Usuario = {
     idUsuario: 0,
     nombre : '',
@@ -38,10 +41,9 @@ export class CardContactosComponent {
     this.flagD = !this.flagD
   }
   GuardarDatos(){
-    //se guarda lo editado
   }
   eliminar(): void {
-    this._servicio.deleteContacto(this.contacto.idUsuario).subscribe(
+    this._servicio.deleteContacto(this.idList).subscribe(
       (response) => {
         console.log('Contacto eliminado:', response);
       },
@@ -56,6 +58,7 @@ export class CardContactosComponent {
       response => {
         console.log('Nuevo chat agregado:', response);
         this.uschat.Chat_idChat = response.idChat
+        sessionStorage.setItem("id_chat",response.idChat )
         this._serv.newUsChat(this.uschat).subscribe(
           response=>{
             console.log('Nuevo usuario agregado a chat:', response)
@@ -71,8 +74,6 @@ export class CardContactosComponent {
     );
   }
   cambiosEnElNombre(){
-    this.cambioElTitulo.emit(this.contacto?.nombre)
-    console.log(this.contacto?.nombre)
     
   }
 }

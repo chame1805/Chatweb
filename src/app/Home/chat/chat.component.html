@@ -1,5 +1,5 @@
 
-    <div class="w-full flex justify-center " *ngFor="let mensajes of mensaje.mensaje">
+    <div class="w-full flex justify-center " *ngFor="let mensajes of mensajeDelChat">
             <h2 class="w-full flex justify-center text-green-600 bg-green-100 p-5 text-2xl" *ngIf="mensajes.id_usuario == user">
                 {{mensajes.mensaje}}
             </h2>
