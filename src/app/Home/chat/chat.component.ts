@@ -8,23 +8,35 @@ import { ChatsService } from '../../Services/chats.service';
 })
 export class ChatComponent implements OnInit, DoCheck {
 
+  usuarioActivo : any={
+    email:"",
+    nombre :"",
+    idUsuario:0,
+    password : ""
+  }
   flag = true;
-  constructor(public mensaje: ChatsService){
+  constructor(public _mensaje: ChatsService){
   }
   mensajeDelChat : Mensaje[] = [
   ]
   user : number = Number(sessionStorage.getItem('id_user')) || 0
   ngOnInit(): void {
-    
-    this.mensaje.getMensajes().subscribe(data=>{
+    this._mensaje.getMensajesById(Number(sessionStorage.getItem("id_chat"))).subscribe(data=>{
+    this.mensajeDelChat=data
+      this._mensaje.mensaje = data
+      console.log("datos cargados", this._mensaje.mensaje)
+    })
+    this._mensaje.getPerteneceTO(Number(sessionStorage.getItem("id_chat"))).subscribe(data=>{
+      this._mensaje.usuarios = data
       data.forEach(element => {
-        if(this.user == element.id_usuario){
-          this.mensajeDelChat.push(element)
+        if(element.Usuario_idUsuario != this.user){
+          this._mensaje.getChatsById(element.Usuario_idUsuario).subscribe(data=>{
+            this.usuarioActivo = data
+            console.log(data)
+          })
         }
-        console.log("del chat",this.mensajeDelChat)
       })
-      this.mensaje.mensaje = data
-      console.log("datos cargados", this.mensaje.mensaje)
+      console.log("usuarios en el chat",data)
     })
   }
   ngDoCheck(): void {
@@ -36,26 +48,31 @@ export class ChatComponent implements OnInit, DoCheck {
       fecha: "",
       estatus: false,
       id_usuario: sessionStorage.getItem("id_user"),
-      id_chat: 8,
+      id_chat: sessionStorage.getItem("id_chat") || 0,
       mensaje: ""
     }
     enviarMensaje(){
       const date  = new Date()
       const hora = (date.getHours()+ ":" + date.getMinutes())
       this.msj.hora = hora
-      this.mensaje.addMensaje(this.msj).subscribe(data => {
+      this._mensaje.addMensaje(this.msj).subscribe(data => {
         console.log("mensaje añadido" ,data)
+        this._mensaje.updateChat(Number(sessionStorage.getItem("id_chat")), {"ultimo_msj": data.mensaje }).subscribe(data=>{
+          console.log("chat actualizado", data)
+        })
       },
       error => {
         console.error('Error al agregar mensaje:', error);
       })
+      
       this.msj = {
         hora: "",
         fecha: "",
         estatus: false,
         id_usuario: sessionStorage.getItem("id_user "),
-        id_chat: 6,
+        id_chat: sessionStorage.getItem("id_chat") || 0,
         mensaje: ""
       }
     }
+
 }

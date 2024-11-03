@@ -13,6 +13,7 @@ export class ConnectDatabaseService {
   private apiUrl = 'http://localhost:3000/api/chats/';
   private apiUrl2 = 'http://localhost:3000/api/uschat';
   private apiUrl3 = "http://localhost:3000/api/uschat/usuario/"
+  private apiUrlPert = "{´/usuario/  /chats´}"
   constructor(private http: HttpClient) { }
   
   getChats(id: number): Observable<Chat[]>{
