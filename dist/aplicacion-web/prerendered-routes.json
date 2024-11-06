@@ -1,0 +1,11 @@
+{
+  "routes": [
+    "/contacto",
+    "/home/chat",
+    "/inicio",
+    "/login",
+    "/nuevo-chat",
+    "/register",
+    "/registro"
+  ]
+}
