@@ -19,7 +19,6 @@ export class RegisterComponent {
   registerUser() {
     this.userP.enviarDatos(this.userData).subscribe(
       (response) => {
-        console.log('Datos enviados', response);
         this.router.navigate(['login'])
       },
       (error) => {
@@ -27,7 +26,6 @@ export class RegisterComponent {
         this.alert = !this.alert
       }
     )
-    // Resetea el formulario
     this.userData = {
       "nombre": "",
 	    "email": "",

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioHasChat } from '../../Interfaces/UsuarioHasChat';
 import { Usuario } from '../../Interfaces/contacto';
@@ -10,13 +10,12 @@ import { ConnectDatabaseService } from '../../Services/connect-list-chats.servic
   templateUrl: './card-contactos.component.html',
   styleUrl: './card-contactos.component.css'
 })
-export class CardContactosComponent implements OnInit{
+export class CardContactosComponent implements OnInit, OnDestroy{
   constructor( private _servicio: ConnectListChatsVaciosService, private _serv: ConnectDatabaseService,private router: Router){}
 
   idUsuario: number = sessionStorage.getItem('id_user') as string | null ? parseInt(sessionStorage.getItem('id_user')!) : 0;
 
   ngOnInit(): void {
-      console.log(this.contacto)
   }
   uschat: UsuarioHasChat={
     Chat_idChat : 0 ,
@@ -59,13 +58,11 @@ export class CardContactosComponent implements OnInit{
     this._serv.getChats(this.idUsuario).subscribe(
       (response) => {
         this.persona1 = response
-        console.log(response)
       }
     )
     this._serv.getChats(this.contacto.idUsuario).subscribe(
       (response) => {
         this.persona2 = response
-        console.log(response)
       }
     )
     if(this.persona1 && this.persona2){
@@ -74,8 +71,8 @@ export class CardContactosComponent implements OnInit{
         if(this.persona1[i].Chat_idChat == this.persona2[j].Chat_idChat ){
           console.log("coindiden aqui: [" + i + "][" +j + "]")
           sessionStorage.setItem("id_chat", this.persona1[i].Chat_idChat )
-          this.router.navigate(['home/chat'])
           this.existe = true
+          this.router.navigate(['home/chat'])
         }
       }      
     }
@@ -120,5 +117,9 @@ export class CardContactosComponent implements OnInit{
       }
     );
   }
+  ngOnDestroy(): void {
+      
+  }
+
 }
 

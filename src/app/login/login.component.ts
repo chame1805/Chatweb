@@ -9,9 +9,8 @@ import { ConnectDatabaseService1 } from '../Services/connect-database.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  cerrarModal(){
-    this.alert = !this.alert
-  }
+  cerrarModal(){this.alert = !this.alert}
+  datos: Usuario[] =[]
   loginData: LoginData = {
     nombre: '',
     password: '',
@@ -20,13 +19,10 @@ export class LoginComponent implements OnInit {
   };
   alert : boolean =false
   constructor ( public users: ConnectDatabaseService1, private router: Router) {}
-  datos: Usuario[] =[]
-
   ngOnInit(): void {
     this.users.get().subscribe(
       (response) => {
         this.datos = response
-        console.log(this.datos);
       },
       (error) => {
         console.error('Error al obtener datos', error);
@@ -37,7 +33,6 @@ export class LoginComponent implements OnInit {
     this.datos.length == 0 ? this.alert = !this.alert : ""
     for (let index = 0; index < this.datos.length; index++) {
       if( this.datos[index].email == this.loginData.correo && this.datos[index].password == this.loginData.password ){
-        console.log('Inicio de sesión exitoso:', this.datos[index]);
         sessionStorage.setItem("id_user", this.datos[index].idUsuario)
         this.router.navigate(['/inicio'])
       }

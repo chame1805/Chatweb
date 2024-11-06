@@ -8,7 +8,7 @@ import { Usuario } from '../Interfaces/contacto';
 })
 export class ConnectDatabaseService1 {
 
-  private apiUrl = 'http://localhost:3000/api/usuarios/'; // URL de tu API
+  private apiUrl = 'http://34.228.129.198:3000/api/usuarios/';
 
   constructor(private http: HttpClient) { }
 

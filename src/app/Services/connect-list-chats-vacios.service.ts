@@ -12,8 +12,8 @@ export class ConnectListChatsVaciosService {
   listaContactos : Usuario[]=[]
   chats: Contacto[]=[]
   localstorage = Number(sessionStorage.getItem('id_user')) || 0
-  private apiUrl = 'http://localhost:3000/api/contatos';
-  private apiUrl2 = 'http://localhost:3000/api/usuarios';
+  private apiUrl = 'http://34.228.129.198:3000/api/contatos';
+  private apiUrl2 = 'http://34.228.129.198:3000/api/usuarios';
   constructor(private http: HttpClient) { }
 
   deleteContacto(id: number): Observable<Contacto>{

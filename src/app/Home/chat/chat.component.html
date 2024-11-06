@@ -1,28 +1,33 @@
-<h1 class="w-full bg-blue-200 text-xl flex justify-between items-center text-blue-600">
-    <a routerLink="/inicio"> regresar</a>
-    <span class="p-2 text-3xl">chat con {{usuarioActivo.nombre}}</span>
-    <a routerLink="/home"> home </a>
+<div class="h-screen w-full">
+
+
+<h1 class="w-full bg-blue-200 text-xl flex justify-between items-center text-blue-600 p-2 md:p-4">
+    <a routerLink="/inicio" class="text-sm md:text-lg">regresar</a>
+    <span class="text-lg md:text-3xl">chat con {{usuarioActivo.nombre}}</span>
+    <a routerLink="/home" class="text-sm md:text-lg">home</a>
   </h1>
   
-  <div class="p-5 w-full">
+  <div class="p-3 w-full overflow-hidden overflow-y-scroll  lg:h-[80%] lg:px-80 md:h-[300px]   sm:h-[85%] h-[85%]" id="scrollme" #scrollMe>
     <div class="w-full flex justify-center" *ngFor="let mensajes of mensajeDelChat">
-      <h2 class="w-3/4 flex justify-end text-green-600 p-1 text-2xl" *ngIf="mensajes.id_usuario == user">
-        <span class="bg-green-100 px-5 py-1 rounded-tl-[40px] rounded-br-[30px] rounded-bl-[5px]">{{mensajes.mensaje}}
-          <span class="text-xs">{{mensajes.hora}}</span>
+      <h2 class="w-[90%] sm:w-3/4 flex justify-end text-green-600 p-1 text-base md:text-2xl" *ngIf="mensajes.id_usuario == user">
+        <span class="bg-green-100 px-3 py-1 md:px-5 rounded-tl-[20px] md:rounded-tl-[40px] rounded-br-[15px] md:rounded-br-[30px] rounded-bl-[5px]">
+          {{mensajes.mensaje}}
+          <span class="text-xs block mt-1">{{mensajes.hora}}</span>
         </span>
       </h2>
-      <h2 class="w-3/4 flex text-blue-600 p-1 text-2xl" *ngIf="mensajes.id_usuario != user">
-        <span class="bg-blue-100 px-5 py-1 rounded-bl-[30px] rounded-tr-[40px] rounded-br-[5px]">{{mensajes.mensaje}}
-          <span class="text-xs">{{mensajes.hora}}</span>
+      <h2 class="w-[90%] sm:w-3/4 flex text-blue-600 p-1 text-base md:text-2xl" *ngIf="mensajes.id_usuario != user">
+        <span class="bg-blue-100 px-3 py-1 md:px-5 rounded-bl-[15px] md:rounded-bl-[30px] rounded-tr-[20px] md:rounded-tr-[40px] rounded-br-[5px]">
+          {{mensajes.mensaje}}
+          <span class="text-xs block mt-1">{{mensajes.hora}}</span>
         </span>
       </h2>
     </div>
   </div>
-  
-  <form (ngSubmit)="enviarMensaje()">
-    <label class="fixed bottom-5 left-[25%] w-[50%]" for="">
-      <input class="border border-black w-full p-3 rounded-lg" placeholder="Redacta un mensaje" type="text" name="mensaje" id="" [(ngModel)]="msj.mensaje">
+</div>
+  <form (ngSubmit)="enviarMensaje()" class="fixed bottom-5 left-0 w-full flex justify-center">
+    <label class="w-[70%] sm:w-[50%]">
+      <input class="border border-black w-full p-2 md:p-3 rounded-lg" placeholder="Redacta un mensaje" type="text" name="mensaje" [(ngModel)]="msj.mensaje">
     </label>
-    <button class="fixed bottom-5 right-[19.5%] bg-green-400/80 rounded-lg p-3">Enviar</button>
+    <button class="ml-2 bg-green-400/80 rounded-lg p-2 md:p-3">Enviar</button>
   </form>
   

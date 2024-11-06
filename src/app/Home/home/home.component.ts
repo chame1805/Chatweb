@@ -43,7 +43,6 @@ export class HomeComponent  implements OnInit{
                           if(response.idUsuario != Number(sessionStorage.getItem('id_user')) ){
                             dta.users += response.nombre
                             dta.idUser = response.idUsuario
-                            console.log(dta.idUser)
                           } 
                         }
                       )
@@ -65,13 +64,11 @@ export class HomeComponent  implements OnInit{
     this._serv.getChats(this.idUsuario).subscribe(
       (response) => {
         this.persona1 = response
-        console.log(response)
       }
     )
     this._serv.getChats(id).subscribe(
       (response) => {
         this.persona2 = response
-        console.log(response)
       }
     )
     if(this.persona1 && this.persona2){
