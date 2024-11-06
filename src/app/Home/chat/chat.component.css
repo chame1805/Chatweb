@@ -1,0 +1,6 @@
+
+
+#scrollme {
+    scrollbar-width: none;          /* "auto" or "thin" */
+    scrollbar-color: rgb(37 99 235 / var(--tw-text-opacity)) orange;   /* scroll thumb and track */
+  }

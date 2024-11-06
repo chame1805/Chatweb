@@ -10,9 +10,10 @@ import { Compuesto } from '../Interfaces/Compuesto';
 })
 export class ConnectDatabaseService {
 
-  private apiUrl = 'http://localhost:3000/api/chats/';
-  private apiUrl2 = 'http://localhost:3000/api/uschat';
-  private apiUrl3 = "http://localhost:3000/api/uschat/usuario/"
+  private api = "http://34.228.129.198:3000/"
+  private apiUrl = this.api +  'api/chats/';
+  private apiUrl2 = this.api + 'api/uschat';
+  private apiUrl3 =  this.api + "api/uschat/usuario/"
   private apiUrlPert = "{´/usuario/  /chats´}"
   constructor(private http: HttpClient) { }
   

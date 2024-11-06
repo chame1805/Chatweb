@@ -65,8 +65,6 @@ export class ContactosComponent implements OnInit, OnDestroy {
           console.log("no coincide")
         }
       });
-      console.log(this._servicio.chats);
-      console.log(this._servicio.listaContactos);
     });
     
     
@@ -74,5 +72,6 @@ export class ContactosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._servicio.chats = [];
+    this._servicio.listaContactos = []
   }
 }

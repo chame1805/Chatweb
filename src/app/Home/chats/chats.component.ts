@@ -37,8 +37,6 @@ export class ChatsComponent implements OnInit, AfterContentInit, OnDestroy {
         this._servicio.listaContactos.push(data)
       })
     }
-    console.log(this._servicio.chats)
-    console.log( this._servicio.listaContactos);
   }
   ngAfterContentInit(): void {
   }

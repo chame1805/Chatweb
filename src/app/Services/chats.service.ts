@@ -12,11 +12,12 @@ export class ChatsService {
   mensaje : Mensaje[] = [
   ]
 
+  api: string = "http://34.228.129.198:3000/"
   usuarios: Usuario[]=[]
-  private apiUrl = 'http://localhost:3000/api/mensajes/';
-  private apiUrl2 = 'http://localhost:3000/api/usuarios';
-  private apiUrlPert = "http://localhost:3000/api/uschat/usuario/"
-  private updChat="http://localhost:3000/api/chats/"
+  private apiUrl = this.api + 'api/mensajes/';
+  private apiUrl2 = this.api + 'api/usuarios';
+  private apiUrlPert = this.api +  "api/uschat/usuario/"
+  private updChat= this.api + "api/chats/"
   constructor(private http: HttpClient) { }
 
   
